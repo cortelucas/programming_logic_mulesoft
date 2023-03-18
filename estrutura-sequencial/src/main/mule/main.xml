@@ -210,9 +210,11 @@ output application/json
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var soma = payload.nota_01 + payload.nota_02 + payload.nota_03 + payload.nota_04
 ---
 {
-  response: "A nota média foi: 7.5"
+  response: "A nota média foi: " ++ (soma / 4)
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
