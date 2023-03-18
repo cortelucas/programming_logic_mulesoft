@@ -1,0 +1,16 @@
+{
+  "response": {
+    "latas_18": {
+      "total": 1,
+      "valor": 80.00
+    },
+    "latas_3.6": {
+      "total": 3,
+      "valor": 75.00
+    },
+    "misturado": {
+      "total": 3,
+      "valor": 75.00
+    }
+  }
+}
