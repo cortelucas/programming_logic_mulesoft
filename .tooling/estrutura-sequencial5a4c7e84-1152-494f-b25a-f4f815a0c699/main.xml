@@ -188,16 +188,7 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="post:\exe-02:application\json:estrutura-sequencial-config">
-        <ee:transform>
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  response: "O número informado foi 2"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+        <flow-ref doc:name="exe-02" doc:id="629402ae-e12e-4555-90d3-2f59e8dec3e1" name="exe-02"/>
     </flow>
     <flow name="post:\exe-03:application\json:estrutura-sequencial-config">
         <ee:transform>
