@@ -221,16 +221,18 @@ var soma = payload.nota_01 + payload.nota_02 + payload.nota_03 + payload.nota_04
 		<logger level="INFO" doc:name="end_flow" doc:id="b35f9c5d-e09d-4451-b872-f34a46b49f7a" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-05:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="76b13322-7454-4590-bb00-8cdcbd587a59" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
-  response: "9m = 900cm"
+  response: payload.metros ++ "m = " ++ (payload.metros * 100) ++ "cm"
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="6e543621-15f9-4fd0-91be-8161b8154193" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-06:application\json:estrutura-sequencial-config">
         <ee:transform>
