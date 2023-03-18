@@ -124,10 +124,22 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\exe-01:estrutura-sequencial-config">
-        <flow-ref doc:name="exe-01" doc:id="f09731d4-0ac9-43e9-aa35-a7451d60d302" name="exe-01"/>
+		<logger level="INFO" doc:name="init_flow" doc:id="01a47308-c92f-4464-859a-3fbc51f19cb5" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform doc:name="set_payload" doc:id="64ffecac-a9b9-47a6-ac25-5a7395c1ed21" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  response: "Alo Mundo!"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="64dc7aa8-767b-4a5f-ae25-bb72083a5dc3" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="get:\lista-de-exercicios:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="ba35afbf-003d-4616-82ee-b5ab169a1b83" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -186,9 +198,21 @@ output application/json
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="a71ac93d-0fe5-4666-9ed6-ea296c4f9f0e" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-02:application\json:estrutura-sequencial-config">
-        <flow-ref doc:name="exe-02" doc:id="629402ae-e12e-4555-90d3-2f59e8dec3e1" name="exe-02"/>
+		<logger level="INFO" doc:name="init_flow" doc:id="959da537-4aed-4b38-a801-bf7d62097fbf" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform doc:name="Transform Message" doc:id="9d434d36-3a5e-4bf4-acd5-4e2ebb9d601b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  response: "O número informado foi " ++ payload.number
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="9a5723d7-dff6-43c9-acab-407034930a87" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-03:application\json:estrutura-sequencial-config">
         <logger level="INFO" doc:name="init_flow" doc:id="e0ca5632-22b4-45be-940b-4528d7852ef4" message='#["Init flow -&gt; " ++ flow.name]' />
