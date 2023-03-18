@@ -259,16 +259,21 @@ output application/json
 		<logger level="INFO" doc:name="end_flow" doc:id="6e543621-15f9-4fd0-91be-8161b8154193" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-06:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="f0ce60f0-d2b4-43db-b933-48f9cc92b357" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+import PI from dw::util::Math
+
+var area_circulo = (PI as Number) * (payload.raio * payload.raio)
 ---
 {
-  response: "A área correspondente a um círculo com 10 de raio é: 314,16"
+  response: "A área correspondente a um círculo com " ++ payload.raio ++ " de raio é: " ++ (area_circulo as String { format: '#.##'})
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="5aa8b375-80f1-4dae-a13f-f979012d1076" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-07:application\json:estrutura-sequencial-config">
         <ee:transform>
