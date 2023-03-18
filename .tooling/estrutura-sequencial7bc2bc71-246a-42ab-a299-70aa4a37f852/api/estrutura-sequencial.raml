@@ -1,0 +1,317 @@
+#%RAML 1.0
+title: estrutura-sequencial
+
+uses:
+  types: libraries/types.raml
+
+/lista-de-exercicios:
+  displayName: Lista de exercícios
+  get:
+    description: Mostra a lista de exercícios
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/exercicios.json
+            
+/exe-01:
+  displayName: Exercício 01
+  get:
+    description: Resolução do exercício 01
+    
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                response: 'Alo Mundo!'
+              }
+
+/exe-02:
+  displayName: Exercício 02
+  post:
+    description: Resolução do exercício 02
+
+    body:
+      application/json:
+        type: types.Exe02RequestType
+        example: !include examples/exe02request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe02ResponseType
+            example: !include examples/exe02response.json
+    
+/exe-03:
+  displayName: Exercício 03
+  post:
+    description: Resolução do exercício 03
+
+    body:
+      application/json:
+        type: types.Exe03RequestType
+        example: !include examples/exe03request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe03ResponseType
+            example: !include examples/exe03response.json
+
+/exe-04:
+  displayName: Exercício 04
+  post:
+    description: Resolução do exercício 04
+
+    body:
+      application/json:
+        type: types.Exe04RequestType
+        example: !include examples/exe04request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe04ResponseType
+            example: !include examples/exe04response.json
+
+/exe-05:
+  displayName: Exercício 05
+  post:
+    description: Resolução do exercício 05
+
+    body:
+      application/json:
+        type: types.Exe05RequestType
+        example: !include examples/exe05request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe05ResponseType
+            example: !include examples/exe05response.json
+
+/exe-06:
+  displayName: Exercício 06
+  post:
+    description: Resolução do exercício 06
+
+    body:
+      application/json:
+        type: types.Exe06RequestType
+        example: !include examples/exe06request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe06ResponseType
+            example: !include examples/exe06response.json
+
+/exe-07:
+  displayName: Exercício 07
+  post:
+    description: Resolução do exercício 07
+
+    body:
+      application/json:
+        type: types.Exe07RequestType
+        example: !include examples/exe07request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe07ResponseType
+            example: !include examples/exe07response.json
+
+/exe-08:
+  displayName: Exercício 08
+  post:
+    description: Resolução do exercício 08
+
+    body:
+      application/json:
+        type: types.Exe08RequestType
+        example: !include examples/exe08request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe08ResponseType
+            example: !include examples/exe08response.json
+
+/exe-09:
+  displayName: Exercício 09
+  post:
+    description: Resolução do exercício 09
+
+    body:
+      application/json:
+        type: types.Exe09RequestType
+        example: !include examples/exe09request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe09ResponseType
+            example: !include examples/exe09response.json
+
+/exe-10:
+  displayName: Exercício 10
+  post:
+    description: Resolução do exercício 10
+
+    body:
+      application/json:
+        type: types.Exe10RequestType
+        example: !include examples/exe10request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe10ResponseType
+            example: !include examples/exe10response.json
+/exe-11:
+  displayName: Exercício 11
+  post:
+    description: Resolução do exercício 11
+
+    body:
+      application/json:
+        type: types.Exe11RequestType
+        example: !include examples/exe11request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe11ResponseType
+            example: !include examples/exe11response.json
+
+/exe-12:
+  displayName: Exercício 12
+  post:
+    description: Resolução do exercício 12
+
+    body:
+      application/json:
+        type: types.Exe12RequestType
+        example: !include examples/exe12request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe12ResponseType
+            example: !include examples/exe12response.json
+
+/exe-13:
+  displayName: Exercício 13
+  post:
+    description: Resolução do exercício 13
+
+    body:
+      application/json:
+        type: types.Exe13RequestType
+        example: !include examples/exe13request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe13ResponseType
+            example: !include examples/exe13response.json
+
+/exe-14:
+  displayName: Exercício 14
+  post:
+    description: Resolução do exercício 14
+
+    body:
+      application/json:
+        type: types.Exe14RequestType
+        example: !include examples/exe14request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe14ResponseType
+            example: !include examples/exe14response.json
+
+/exe-15:
+  displayName: Exercício 15
+  post:
+    description: Resolução do exercício 15
+
+    body:
+      application/json:
+        type: types.Exe15RequestType
+        example: !include examples/exe15request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe15ResponseType
+            example: !include examples/exe15response.json
+
+/exe-16:
+  displayName: Exercício 16
+  post:
+    description: Resolução do exercício 16
+
+    body:
+      application/json:
+        type: types.Exe16RequestType
+        example: !include examples/exe16request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe16ResponseType
+            example: !include examples/exe16response.json
+
+/exe-17:
+  displayName: Exercício 17
+  post:
+    description: Resolução do exercício 17
+
+    body:
+      application/json:
+        type: types.Exe17RequestType
+        example: !include examples/exe17request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe17ResponseType
+            example: !include examples/exe17response.json
+
+/exe-18:
+  displayName: Exercício 18
+  post:
+    description: Resolução do exercício 18
+
+    body:
+      application/json:
+        type: types.Exe18RequestType
+        example: !include examples/exe18request.json
+    
+    responses:
+      200:
+        body:
+          application/json:
+            type: types.Exe18ResponseType
+            example: !include examples/exe18response.json
