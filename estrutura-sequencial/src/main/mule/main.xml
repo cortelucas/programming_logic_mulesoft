@@ -191,19 +191,22 @@ output application/json
         <flow-ref doc:name="exe-02" doc:id="629402ae-e12e-4555-90d3-2f59e8dec3e1" name="exe-02"/>
     </flow>
     <flow name="post:\exe-03:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="e0ca5632-22b4-45be-940b-4528d7852ef4" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
-  response: "2 + 2 = 4"
+  response: payload.number_01 ++ " + " ++ payload.number_02 ++ " = " ++ (payload.number_01 + payload.number_02)
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="2f90afd2-674f-4bc4-a343-c763fcb38cd4" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-04:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="7537a319-5985-4e63-9d9d-b16fc329b693" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -213,6 +216,7 @@ output application/json
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="b35f9c5d-e09d-4451-b872-f34a46b49f7a" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-05:application\json:estrutura-sequencial-config">
         <ee:transform>
