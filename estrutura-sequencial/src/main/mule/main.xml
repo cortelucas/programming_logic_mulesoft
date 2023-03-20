@@ -276,19 +276,21 @@ var area_circulo = (PI as Number) * (payload.raio * payload.raio)
 		<logger level="INFO" doc:name="end_flow" doc:id="5aa8b375-80f1-4dae-a13f-f979012d1076" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-07:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="3fa5e314-b64d-4c2f-8e07-c4b3b9f86ffd" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
   response: {
-    area: "A área do quadrado é: 100 m2",
-    dobro_area: "O dobro desta área é: 200 m2"
+    area: "A área do quadrado é: " ++ (payload.lado_quadrado * payload.lado_quadrado) ++ " m2",
+    dobro_area: "O dobro desta área é: " ++ (payload.lado_quadrado * payload.lado_quadrado) * 2 ++ " m2"
   }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="3e9dad14-7139-40e9-83b0-e6d207ab488e" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-08:application\json:estrutura-sequencial-config">
         <ee:transform>
