@@ -7,11 +7,13 @@
     <flow name="estrutura-sequencial-main">
         <http:listener config-ref="estrutura-sequencial-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+                <http:headers><![CDATA[#[(vars.outboundHeaders default {}) ++ {
+	"Content-Encoding": "UTF-8"
+}]]]></http:headers>
             </http:response>
             <http:error-response statusCode="#[vars.httpStatus default 500]">
-                <http:body>#[payload]</http:body>
-                <http:headers>#[vars.outboundHeaders default {}]</http:headers>
+                <http:body><![CDATA[#[payload]]]></http:body>
+                <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
         <apikit:router config-ref="estrutura-sequencial-config" />
@@ -128,7 +130,7 @@ output application/json
 		<ee:transform doc:name="set_payload" doc:id="64ffecac-a9b9-47a6-ac25-5a7395c1ed21" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: "Alo Mundo!"
@@ -142,7 +144,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json  encoding="UTF-8"
 ---
 {
   "exe-01": "Faça um Programa que mostre a mensagem 'Alo mundo' na tela.",
@@ -205,7 +207,7 @@ output application/json
 		<ee:transform doc:name="Transform Message" doc:id="9d434d36-3a5e-4bf4-acd5-4e2ebb9d601b" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: "O número informado foi " ++ payload.number
@@ -219,7 +221,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: payload.number_01 ++ " + " ++ payload.number_02 ++ " = " ++ (payload.number_01 + payload.number_02)
@@ -233,7 +235,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var soma = payload.nota_01 + payload.nota_02 + payload.nota_03 + payload.nota_04
 ---
@@ -249,7 +251,7 @@ var soma = payload.nota_01 + payload.nota_02 + payload.nota_03 + payload.nota_04
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: payload.metros ++ "m = " ++ (payload.metros * 100) ++ "cm"
@@ -263,7 +265,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 import PI from dw::util::Math
 
 var area_circulo = (PI as Number) * (payload.raio * payload.raio)
@@ -280,7 +282,7 @@ var area_circulo = (PI as Number) * (payload.raio * payload.raio)
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: {
@@ -297,7 +299,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: "Seu salário será de: R\$ " ++ (payload.salario_por_horas * payload.horas_trabalhadas_mes)
@@ -311,7 +313,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var graus_celsius = 5 * ((payload.graus_fahrenheit - 32) / 9)
 ---
@@ -327,7 +329,7 @@ var graus_celsius = 5 * ((payload.graus_fahrenheit - 32) / 9)
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var graus_fahrenheit = (payload.graus_celsius * 1.8) + 32
 ---
@@ -343,7 +345,7 @@ var graus_fahrenheit = (payload.graus_celsius * 1.8) + 32
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: {
@@ -361,7 +363,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var peso_ideal = (72.7 * payload.altura) - 58
 ---
@@ -377,7 +379,7 @@ var peso_ideal = (72.7 * payload.altura) - 58
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 ---
 {
   response: {
@@ -394,7 +396,7 @@ output application/json
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var excesso = payload.peso - 50
 var multa = excesso * 4
@@ -422,7 +424,7 @@ else
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var salario_bruto: Number = payload.valor_da_hora * payload.horas_trabalhadas
 var ir: Number = salario_bruto * 0.11
@@ -448,7 +450,7 @@ var salario_liquido: Number = salario_bruto - ir - inss - sindicato
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var area_pintada: Number = payload.tamanho_m_quadrado
 var litros: Number = area_pintada / 3
@@ -471,7 +473,7 @@ var preco: Number = latas * 80
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var area_pintada: Number = payload.tamanho_m_quadrado
 var litros: Number = area_pintada / 6
@@ -520,7 +522,7 @@ var preco_mistura: Number = (latas_inteiras * 80) + (galoes_inteiros * 25)
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
-output application/json
+output application/json encoding="UTF-8"
 
 var tempo_download: Number = ((payload.tamanho_em_mb * 8) / payload.velocidade_em_mbps) / 60
 
