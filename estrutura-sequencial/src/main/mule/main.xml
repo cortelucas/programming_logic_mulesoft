@@ -373,19 +373,21 @@ var peso_ideal = (72.7 * payload.altura) - 58
 		<logger level="INFO" doc:name="end_flow" doc:id="602c85fd-32cc-4de3-a165-0c288dbb7efb" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-13:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="8363e689-5e2f-450d-b515-aa19781d5400" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
   response: {
-    homem: "Peso ideal é: 75,04 Kg",
-    mulher: "Peso ideal é: 68,94 Kg"
+    homem: "Peso ideal é: " ++ ((72.7 * payload.altura) - 58) ++ " Kg",
+    mulher: "Peso ideal é: " ++ ((62.1 * payload.altura) - 44.7) ++ " Kg"
   }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="c11fffee-7d98-4bb0-b5e7-002f1778b382" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-14:application\json:estrutura-sequencial-config">
         <ee:transform>
