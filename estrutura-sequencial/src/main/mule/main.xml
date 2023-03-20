@@ -293,7 +293,7 @@ output application/json
 		<logger level="INFO" doc:name="end_flow" doc:id="3e9dad14-7139-40e9-83b0-e6d207ab488e" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-08:application\json:estrutura-sequencial-config">
-        <logger level="INFO" doc:name="init_flow" doc:id="b8ffce00-7063-44db-b7c3-81c47b931983" message='#["Init flow -&gt; " ++ flow.name]' />
+		<logger level="INFO" doc:name="init_flow" doc:id="5bedff12-e0db-4ed8-a34c-7d88749128dc" message='#["Init flow -&gt; " ++ flow.name]' />
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
@@ -304,19 +304,23 @@ output application/json
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
-		<logger level="INFO" doc:name="end_flow" doc:id="701802f8-fbbc-4b14-ad5c-68c88ae53a78" message='#["End flow -&gt; " ++ app.name]' />
+		<logger level="INFO" doc:name="end_flow" doc:id="9a8e8336-f173-43ff-a785-bf13f59b00f8" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-09:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="be0d9492-7d99-42ce-89ec-b4ff9fe24ede" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var graus_celsius = 5 * ((payload.graus_fahrenheit - 32) / 9)
 ---
 {
-  response: "32°F = 0°C"
+  response: payload.graus_fahrenheit ++ "ºF = " ++ graus_celsius ++ "ºC"
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="984eab22-6410-4d9f-885e-aeffbccbff47" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-10:application\json:estrutura-sequencial-config">
         <ee:transform>
