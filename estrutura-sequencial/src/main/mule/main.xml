@@ -293,16 +293,18 @@ output application/json
 		<logger level="INFO" doc:name="end_flow" doc:id="3e9dad14-7139-40e9-83b0-e6d207ab488e" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-08:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="b8ffce00-7063-44db-b7c3-81c47b931983" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
-  response: "Seu salário será de: R\$ 4180,00"
+  response: "Seu salário será de: R\$ " ++ (payload.salario_por_horas * payload.horas_trabalhadas_mes)
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="701802f8-fbbc-4b14-ad5c-68c88ae53a78" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-09:application\json:estrutura-sequencial-config">
         <ee:transform>
