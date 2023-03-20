@@ -390,19 +390,32 @@ output application/json
 		<logger level="INFO" doc:name="end_flow" doc:id="c11fffee-7d98-4bb0-b5e7-002f1778b382" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-14:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="591f97ef-a692-4acf-9dd5-defb732d32c7" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var excesso = payload.peso - 50
+var multa = excesso * 4
 ---
-{
-  response: {
-    excesso: "Peso excedente é: 25.45 Kg",
-    multa: "Multa é: R\$ 101.80"
-  }
-}]]></ee:set-payload>
+if (excesso >= 0)
+	{
+	  response: {
+	    excesso: "Peso excedente é: " ++ excesso ++ " Kg",
+	    multa: "Multa é: R\$ " ++ multa
+	  } 
+	}
+else
+	{
+	  response: {
+	    excesso: "Peso excedente é: 0 Kg",
+	    multa: "Multa é: R\$ 0.00"
+	  } 
+	}]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="f01d4f01-2923-4be9-b4bf-933ac54d2799" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-15:application\json:estrutura-sequencial-config">
         <ee:transform>
