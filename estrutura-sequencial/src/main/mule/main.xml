@@ -357,16 +357,20 @@ output application/json
 		<logger level="INFO" doc:name="end_flow" doc:id="470691c1-c165-4f2a-a9ac-f755eae74b75" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-12:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="2d8ace51-aabb-42f9-ba89-98855db0b78e" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var peso_ideal = (72.7 * payload.altura) - 58
 ---
 {
-  response: "Seu peso ideal é: 75,04 Kg"
+  response: "Seu peso ideal é: " ++ peso_ideal ++ " Kg"
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="602c85fd-32cc-4de3-a165-0c288dbb7efb" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-13:application\json:estrutura-sequencial-config">
         <ee:transform>
