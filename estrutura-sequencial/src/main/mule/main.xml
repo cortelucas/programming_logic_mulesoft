@@ -418,22 +418,30 @@ else
 		<logger level="INFO" doc:name="end_flow" doc:id="f01d4f01-2923-4be9-b4bf-933ac54d2799" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-15:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="40c7ef4e-cfc2-4120-8603-89c8e3426ebb" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var salario_bruto: Number = payload.valor_da_hora * payload.horas_trabalhadas
+var ir: Number = salario_bruto * 0.11
+var inss: Number = salario_bruto * 0.08
+var sindicato: Number = salario_bruto * 0.05
+var salario_liquido: Number = salario_bruto - ir - inss - sindicato
 ---
 {
   response: {
-    salario_bruto: 4410,
-    ir: 485.1,
-    inss: 352.8,
-    sindicato: 220.5,
-    salario_liquido: 3351.6
+    salario_bruto: salario_bruto,
+    ir: ir,
+    inss: inss,
+    sindicato: sindicato,
+    salario_liquido: salario_liquido
   }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="5f8b4884-4e89-4279-b422-a72f56bf7816" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-16:application\json:estrutura-sequencial-config">
         <ee:transform>
