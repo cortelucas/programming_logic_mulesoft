@@ -467,29 +467,53 @@ var preco: Number = latas * 80
 		<logger level="INFO" doc:name="end_flow" doc:id="4854d695-7a21-4f64-86df-cf0e0d9d62a1" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-17:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="fefc70ab-d8b0-4fcc-b6cd-b33eca0969c2" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var area_pintada: Number = payload.tamanho_m_quadrado
+var litros: Number = area_pintada / 6
+
+// Latas
+var latas: Number = ceil(litros / 18)
+var preco_latas: Number = latas * 80
+
+// Galões
+var galoes: Number = ceil(litros / 3.6)
+var preco_galoes: Number = galoes * 25
+
+// Misturado
+var folga: Number = litros * 1.1
+var latas_inteiras: Number = floor(folga / 18)
+var resto: Number = folga mod 18
+var galoes_inteiros: Number = ceil(resto / 3.6)
+
+var preco_mistura: Number = (latas_inteiras * 80) + (galoes_inteiros * 25)
 ---
 {
   response: {
     latas_18: {
-      total: 1,
-      valor: 80.00
+      total: latas,
+      valor: "R\$ " ++ preco_latas as String { format: '#.##' }
     },
     "latas_3.6": {
-      total: 3,
-      valor: 75.00
+      total: galoes,
+      valor: "R\$ " ++ preco_galoes as String { format: '#.##' }
     },
     misturado: {
-      total: 3,
-      valor: 75.00
+      total: {
+          latas: latas_inteiras,
+          galoes: galoes_inteiros
+      },
+      valor: "R\$ " ++ preco_mistura as String { format: '#.##' }
     }
   }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="b67703e2-502a-40f5-a4c0-eab1ba4d9679" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-18:application\json:estrutura-sequencial-config">
         <ee:transform>

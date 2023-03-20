@@ -1,16 +1,19 @@
 {
   "response": {
     "latas_18": {
-      "total": 1,
-      "valor": 80.00
+      "total": 3,
+      "valor": "R$ 240"
     },
     "latas_3.6": {
-      "total": 3,
-      "valor": 75.00
+      "total": 12,
+      "valor": "R$ 300"
     },
     "misturado": {
-      "total": 3,
-      "valor": 75.00
+      "total": {
+        "latas": 2,
+        "galoes": 3
+      },
+      "valor": "R$ 235"
     }
   }
 }
