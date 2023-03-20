@@ -403,7 +403,7 @@ if (excesso >= 0)
 	{
 	  response: {
 	    excesso: "Peso excedente é: " ++ excesso ++ " Kg",
-	    multa: "Multa é: R\$ " ++ multa
+	    multa: "Multa é: R\$ " ++ multa  as String { format: '#.##' }
 	  } 
 	}
 else
@@ -432,11 +432,11 @@ var salario_liquido: Number = salario_bruto - ir - inss - sindicato
 ---
 {
   response: {
-    salario_bruto: salario_bruto,
-    ir: ir,
-    inss: inss,
-    sindicato: sindicato,
-    salario_liquido: salario_liquido
+    salario_bruto: "R\$ " ++ salario_bruto as String { format: '#.##' },
+    ir: "R\$ " ++ ir as String { format: '#.##' },
+    inss: "R\$ " ++ inss as String { format: '#.##' },
+    sindicato: "R\$ " ++ sindicato as String { format: '#.##' },
+    salario_liquido: "R\$ " ++ salario_liquido as String { format: '#.##' }
   }
 }]]></ee:set-payload>
             </ee:message>
@@ -444,19 +444,27 @@ var salario_liquido: Number = salario_bruto - ir - inss - sindicato
 		<logger level="INFO" doc:name="end_flow" doc:id="5f8b4884-4e89-4279-b422-a72f56bf7816" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-16:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="b97ca67b-e108-41d9-bdd2-6bc45900e1ae" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var area_pintada: Number = payload.tamanho_m_quadrado
+var litros: Number = area_pintada / 3
+var latas: Number = ceil(litros / 18)
+var preco: Number = latas * 80 
+
 ---
 {
   response: {
-    total_latas: 1,
-    valor: 80
+    total_latas: latas,
+    valor: "R\$ " ++ preco as String { format: '#.##' }
   }
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="4854d695-7a21-4f64-86df-cf0e0d9d62a1" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-17:application\json:estrutura-sequencial-config">
         <ee:transform>
