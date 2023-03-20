@@ -516,15 +516,23 @@ var preco_mistura: Number = (latas_inteiras * 80) + (galoes_inteiros * 25)
 		<logger level="INFO" doc:name="end_flow" doc:id="b67703e2-502a-40f5-a4c0-eab1ba4d9679" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
     <flow name="post:\exe-18:application\json:estrutura-sequencial-config">
-        <ee:transform>
+        <logger level="INFO" doc:name="init_flow" doc:id="7b278392-321b-401a-abad-113282d6f76b" message='#["Init flow -&gt; " ++ flow.name]' />
+		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
+
+var tempo_download: Number = ((payload.tamanho_em_mb * 8) / payload.velocidade_em_mbps) / 60
+
+var minutos: Number = floor(tempo_download)
+var segundos: Number = floor(((payload.tamanho_em_mb * 8) / payload.velocidade_em_mbps) mod 60)
 ---
+
 {
-  response: "Tempo de download: 4 Minuto(s) 56 Seg(s)."
+  response: "Tempo de download: " ++ minutos ++ " Minuto(s) " ++ segundos ++ " Segundo(s)."
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<logger level="INFO" doc:name="end_flow" doc:id="aa1a8db9-7a4d-4320-b0ac-631a88a49c0e" message='#["End flow -&gt; " ++ app.name]' />
     </flow>
 </mule>
